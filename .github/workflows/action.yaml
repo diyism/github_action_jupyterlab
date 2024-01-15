@@ -1,0 +1,15 @@
+name: jupyterlab
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: '*/30 * * * *'
+
+jobs:
+  env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set ENV
+        run: |
+          sudo apt update -y
+          sudo apt install -y iputils-ping curl python3-venv
+          sudo python3 -m venv v1
