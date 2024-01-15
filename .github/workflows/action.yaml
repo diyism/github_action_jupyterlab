@@ -17,5 +17,5 @@ jobs:
           sudo install ts /usr/bin/
           wget https://github.com/diyism/big_files_share/releases/download/v1.0.0/tsd
           sudo install tsd /usr/bin/
-          wget https://github.com/diyism/big_files_share/releases/download/v1.0.0/tsd.state.enc.gh_action
+          wget https://github.com/diyism/big_files_share/releases/download/v1.0.0/tsd.state.enc.gh-action
           
