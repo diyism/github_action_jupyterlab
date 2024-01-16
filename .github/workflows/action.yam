@@ -2,7 +2,7 @@ name: jupyterlab
 on:
   workflow_dispatch:
 #  schedule:
-#    - cron: '*/30 * * * *'
+#    - cron: '1 */5 * * *'
 
 jobs:
   env:
@@ -22,8 +22,9 @@ jobs:
           while true; do nohup /usr/bin/tsd --tun=userspace-networking --socks5-server=0.0.0.0:8085 --state=./tsd.state --socket=./tsd.sock --port 8443 >/dev/null 2>&1;sleep 1; done >/dev/null 2>&1 &
           sleep 3
           /usr/bin/ts --socket=./tsd.sock up
+          while true; do nohup ping 100.99.12.86 > /dev/null 2>&1; sleep 1; done &
           sudo env PATH="/v1/bin:$PATH" pip install jupyterlab
           sudo env PATH="/v1/bin:$PATH" jupyter lab --generate-config
           sudo bash -c 'echo "c.PasswordIdentityProvider.password_required=True">>/root/.jupyter/jupyter_lab_config.py'
           sudo bash -c 'echo "c.PasswordIdentityProvider.hashed_password='\''argon2:\$argon2id\$v=19\$m=10240,t=10,p=8\$ADVOtoQgkVyBkD2MAacNdg\$RwMBZJA+LsqnMQXxNElfTuUzHUOu1MvaRZ1kypvec9g'\''">>/root/.jupyter/jupyter_lab_config.py'
-          sudo env PATH="/v1/bin:$PATH" jupyter lab --ip=0.0.0.0 --port=8000 --no-browser --allow-root
+          sudo su -c "cd /root && env PATH=\"/v1/bin:\$PATH\" jupyter lab --ip=0.0.0.0 --port=8000 --no-browser --allow-root"
